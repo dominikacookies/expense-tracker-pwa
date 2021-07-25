@@ -9,17 +9,14 @@ const PORT = process.env.PORT || 4000;
 
 const app = express();
 
+mongoose.connect(DB_URL, MONGOOSE_OPTIONS);
+
 app.use(logger("dev"));
 
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(express.static("public"));
-
-mongoose.connect(DB_URL, MONGOOSE_OPTIONS);
-
-// routes
 app.use(require("./routes/api.js"));
 
 app.listen(PORT, () => {
